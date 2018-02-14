@@ -9,6 +9,33 @@ namespace WordTester
 
     class Word00Factory : IGUIfactory
     {
+        private static List<Word00Factory> instances;
+
+        private Word00Factory(){}
+
+        public static Word00Factory getInstance(){
+            if (instances == null)
+            {
+                
+                instances = new List<Word00Factory>();
+
+                Word00Factory instance1 = new Word00Factory();
+                instances.Add(instance1);
+
+                return instance1;
+            }else if(instances.Count < 2 ){
+                Word00Factory instance2 = new Word00Factory();
+                instances.Add(instance2);
+
+                return instance2;
+            }
+            else
+            {
+                Console.WriteLine("Warning: Already two instances of Word00. Returning first instance.");
+                return instances[0];
+            }
+        }
+        
         public IButton createButton()
         {
             return new Word00Button();
